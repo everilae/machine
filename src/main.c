@@ -2,14 +2,15 @@
 #include "machine.h"
 #include "compiler.h"
 
+#define CODE_SIZE 1024
 int main(int argc, char *argv[]) {
 	if (argc < 2) {
 		fprintf(stderr, "Usage: %s file\n", argv[0]);
 		return 1;
 	}
 
-	code_t code[1024] = { HALT };
-	if (compile(argv[1], code, sizeof(code)) != 0) {
+	code_t code[CODE_SIZE] = { HALT };
+	if (compile(argv[1], code, CODE_SIZE) != 0) {
 		return 1;
 	}
 

@@ -9,7 +9,7 @@
 # define PDEBUG(...) do { \
 	struct timespec ts; \
 	clock_gettime(CLOCK_MONOTONIC, &ts); \
-	fprintf(stderr, "[%d.%09d] ", ts.tv_sec, ts.tv_nsec); \
+	fprintf(stderr, "[%li.%09li] ", ts.tv_sec, ts.tv_nsec); \
 	fprintf(stderr, __VA_ARGS__); \
 	fprintf(stderr, "\n"); \
 } while (0)

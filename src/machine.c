@@ -93,6 +93,14 @@ INSTRUCTION_DEF(add) {
 	m->stack[m->sp] += tmp;
 }
 
+INSTRUCTION_DEF(sub) {
+	PDEBUG("SUB");
+	stack_t tmp = m->stack[m->sp];
+	++m->sp;
+	CHECK(m, m->sp < m->stack_size, STACK_UNDERFLOW);
+	m->stack[m->sp] -= tmp;
+}
+
 INSTRUCTION_DEF(mul) {
 	PDEBUG("MUL");
 	stack_t tmp = m->stack[m->sp];
@@ -116,6 +124,7 @@ static const machine_instruction_t instruction_table[1 << sizeof(code_t) * 8] = 
 	[INC]	= &INSTRUCTION(inc),
 	[DEC]	= &INSTRUCTION(dec),
 	[ADD]	= &INSTRUCTION(add),
+	[SUB]	= &INSTRUCTION(sub),
 	[DUP]	= &INSTRUCTION(dup),
 	[PUSH]	= &INSTRUCTION(push),
 	[POP]	= &INSTRUCTION(pop),

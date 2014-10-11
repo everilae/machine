@@ -9,6 +9,7 @@ enum instruction_t {
 	INC,
 	DEC,
 	ADD,
+	SUB,
 	DUP,
 	PUSH,
 	POP,

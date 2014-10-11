@@ -10,12 +10,13 @@ struct tokenizer_t {
 	FILE *fp;
 	const char *delim;
 	char *line;
+	size_t lineno;
 	char *saveptr;
 	char *token;
 	char buffer[TOKENIZER_BUFLEN];
 };
 
 extern void tokenizer_init(struct tokenizer_t *);
-extern char *tokenizer_tokenize(struct tokenizer_t *);
+extern char *tokenizer_next(struct tokenizer_t *);
 
 #endif

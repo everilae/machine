@@ -7,6 +7,7 @@ static void tokenizer_readline(struct tokenizer_t *t) {
 	t->saveptr = NULL;
 	/* read next line (if buffer can hold it) */
 	t->line = fgets(t->buffer, sizeof(t->buffer), t->fp);
+	t->lineno++;
 	PDEBUGIF(t->line, "%s: %s", __FUNCTION__, t->line);
 }
 
@@ -14,7 +15,7 @@ void tokenizer_init(struct tokenizer_t *t) {
 	tokenizer_readline(t);
 }
 
-char *tokenizer_tokenize(struct tokenizer_t *t) {
+char *tokenizer_next(struct tokenizer_t *t) {
 	if (t->line == NULL) {
 		return NULL;
 	}
@@ -27,7 +28,7 @@ char *tokenizer_tokenize(struct tokenizer_t *t) {
 	if (t->token == NULL) {
 		/* line consumed, read next line and recurse */
 		tokenizer_readline(t);
-		return tokenizer_tokenize(t);
+		return tokenizer_next(t);
 	}
 
 	return t->token;
