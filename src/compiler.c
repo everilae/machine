@@ -135,14 +135,10 @@ int compile(const char *path, code_t *code, size_t code_size) {
 		},
 	};
 
-	if (compiler_init(&c, path) == NULL) {
-		/* initialization failed, cannot continue */
-		goto exit;
+	if (compiler_init(&c, path) != NULL) {
+		result = compiler_compile(&c);
 	}
 
-	result = compiler_compile(&c);
-
-exit:
 	compiler_delete(&c);
 	return result;
 }
